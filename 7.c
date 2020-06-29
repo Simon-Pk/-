@@ -24,6 +24,28 @@ else
     printf("Ошибка открытия файла");
 return **A;
                                   }
+int decision(int A[][n],int x[],int *pfunc(A)){
+pfunc(A);
+ int z[1],i, j, sum;
+ z[0] = 0;
+ for (j = 0; j < n; j++)
+	{
+		sum = 0;
+
+		for (i = 0; i < n; i++)
+		{
+			if (A[i][j] > 0)
+				sum += A[i][j];
+		}
+
+		if (sum > z[0] || j == 0) {
+			z[0] = sum;
+			for (i = 0; i < n; i++)
+				x[i] = A[i][j];
+		}
+	}
+	return *x;
+ }
 int main()
 {
 setlocale(LC_ALL,"Russian");
@@ -41,4 +63,5 @@ do{
             pfunc=file_fill_array;
             break;
                }
+decision(A,x,*pfunc);
 }
