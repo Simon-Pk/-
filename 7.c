@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h>
 #define n 5
 int keyboard_fill_array(int (*A)[n]) {
 for (int i = 0; i < n ; i++){
@@ -22,7 +21,7 @@ if(f!=NULL){
     fclose(f);
            }
 else
-    printf("Ошибка открытия файла");
+    printf("Error opening file");
 return **A;
                                   }
 
@@ -89,16 +88,15 @@ fprintf(f,"\nx[%d]=%d",i,x[i]);
 fprintf(f,"\ny=%d",y);
            }
 else
-    printf("Ошибка открытия файла");
+    printf("Error opening file");
                               }
 
 int main()
 {
-setlocale(LC_ALL,"Russian");
 int A[n][n], x[n],num,y;
 int (*pfunc)(int (*)[n]) = NULL;
 do{
-    printf("Введите 1 - чтобы ввести значения с клавиатуры и 2 - чтобы взять значения из файла\n");
+    printf("1 - keyboard \n2 - file\n");
     scanf("%d",&num);
   }while(num!=1 && num!=2);
     switch(num){
