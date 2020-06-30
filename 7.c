@@ -11,6 +11,7 @@ for (int i = 0; i < n ; i++){
                             }
 return **A;
                                      }
+
 int file_fill_array(int (*A)[n]){
 FILE *f;
 f=fopen("f.txt","r");
@@ -24,32 +25,77 @@ else
     printf("Ошибка открытия файла");
 return **A;
                                   }
+
 int decision(int A[][n],int x[],int *pfunc(A)){
 pfunc(A);
- int z[1],i, j, sum;
- z[0] = 0;
- for (j = 0; j < n; j++)
-	{
-		sum = 0;
+int z[1],i, j, sum;
+z[0] = 0;
+for (j = 0; j < n; j++){
+    sum = 0;
+    for (i = 0; i < n; i++){
+        if (A[i][j] > 0)
+        sum += A[i][j];
+                           }
+        if (sum > z[0] || j == 0) {
+            z[0] = sum;
+            for (i = 0; i < n; i++)
+                x[i] = A[i][j];
+                                  }
+                       }
+return *x;
+                                              }
 
-		for (i = 0; i < n; i++)
-		{
-			if (A[i][j] > 0)
-				sum += A[i][j];
-		}
+ int progression(int y, int x[], int i){
+if (i < n){
+    if ((x[0] == x[1] == 1) && (x[i] == x[i - 1] + x[i - 2])){
+        y = 1;
+                                                             }
+    else{
+        y = 0;
+        }
+    if (y == 1)
+        y = progression(y, x, i + 1);
+          }
+    else{
+        y = 1;
+        return y;
+        }
+return y;
+                                       }
 
-		if (sum > z[0] || j == 0) {
-			z[0] = sum;
-			for (i = 0; i < n; i++)
-				x[i] = A[i][j];
-		}
-	}
-	return *x;
- }
+int output(int A[][n],int x[],int y){
+FILE *f;
+system("cls");
+for(int i=0;i<n;i++){
+        for (int j=0;j<n;j++){
+            printf("A[%d][%d]=%d ", i, j, A[i][j]);
+                             }
+    printf("\n");
+                     }
+    for(int i=0;i<n;i++)
+printf("\nx[%d]=%d",i,x[i]);
+printf("\ny=%d",y);
+f=fopen("out.txt","w");
+if(f!=NULL){
+        for(int i=0;i<n;i++){
+        for (int j=0;j<n;j++){
+            fprintf(f,"A[%d][%d]=%d ", i, j, A[i][j]);
+                             }
+    fprintf(f,"\n");
+                            }
+
+    for(int i=0;i<n;i++)
+fprintf(f,"\nx[%d]=%d",i,x[i]);
+fprintf(f,"\ny=%d",y);
+           }
+else
+    printf("Ошибка открытия файла");
+                              }
+
 int main()
 {
 setlocale(LC_ALL,"Russian");
-int A[n][n], x[n],num;
+int A[n][n], x[n],num,y;
 int (*pfunc)(int (*)[n]) = NULL;
 do{
     printf("Введите 1 - чтобы ввести значения с клавиатуры и 2 - чтобы взять значения из файла\n");
@@ -64,4 +110,6 @@ do{
             break;
                }
 decision(A,x,*pfunc);
+y=progression(y, x, 2);
+output(A,x,y);
 }
